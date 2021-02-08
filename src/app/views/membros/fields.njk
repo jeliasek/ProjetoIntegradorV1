@@ -1,0 +1,108 @@
+ <div class="item">
+            <div>Foto</div>
+            <div>
+                <input 
+                    type="url"
+                    name="foto"
+                    placeholder="http://"
+                    value="{{ membro.foto }}"
+                >
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Nome</div>
+            <div>
+                <input 
+                    type="text"
+                    name="nome"
+                    placeholder="Nome do Membro"
+                    value="{{ membro.nome }}"
+                >
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Data de Nascimento</div>
+            <div>
+                <input 
+                    type="date"
+                    name="dataNasc"
+                    value="{{ membro.birth }}"
+                >
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Email</div>
+            <div>
+                <input 
+                    type="text"
+                    name="email"
+                    placeholder="Email do Membro"
+                    value="{{ membro.email }}"
+                >
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Logradouro</div>
+            <div>
+                <input 
+                    type="text"
+                    name="logradouro"
+                    placeholder="Logradouro do Membro"
+                    value="{{ membro.logradouro }}"
+                >
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Usuário</div>
+            <div>
+                <input 
+                    type="usuario"
+                    name="usuario"
+                    placeholder="Login do Membro"
+                    value="{{ membro.usuario }}"
+                >
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Senha</div>
+            <div>
+                <input 
+                    type="password"
+                    name="senha"
+                    placeholder="Senha do Membro"
+                    value="{{ membro.nome }}"
+                >
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Sexo</div>
+            <div>
+                <span> 
+                    <input 
+                        type="radio" 
+                        name="situacao" 
+                        value="A" 
+                        {% if membro.situacao == 'A' %}
+                            checked
+                        {% endif %}> Ativo
+                </span>
+                <span> 
+                    <input 
+                        type="radio" 
+                        name="situacao" 
+                        value="I"
+                        {% if membro.situacao == 'I' %}
+                            checked
+                        {% endif %}> Inativo 
+                </span>
+            </div>
+        </div>
+
+        <button type="submit">Salvar</button>

@@ -1,0 +1,42 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+<div class="card">
+    <section 
+        class="avatar" 
+        style="background: url(https://source.unsplash.com/collection/1180645/500x500) no-repeat center center / cover"></section>
+
+    <section class="details">
+        <h3>Detalhes Financeiro</h3>
+
+        <div class="item">
+            <div>Descricao</div>
+            <div>{{financeiro.descricao}}</div>
+        </div>
+
+        <div class="item">
+            <div>Tipo</div>
+            <div>{{ "Entrada" if financeiro.tipo == "E" else "Saída"}}</div>
+        </div>
+
+         <div class="item">
+            <div>Pago</div>
+            <div>{{ "Sim" if financeiro.ispago else "Não"}}</div>
+        </div>
+
+        <div class="item">
+            <div>Valor</div>
+            <div>{{financeiro.valor}}</div>
+        </div>
+
+        <div class="item">
+            <div>Membro</div>
+            <div>{{financeiro.user_name}}</div>
+        </div>
+
+        <a href="/financeiros/{{ financeiro.id }}/edit" class="button">Editar</a>
+        <a href="/financeiros" class="button">Voltar</a>
+
+    </section>
+</div>
+{% endblock content %}

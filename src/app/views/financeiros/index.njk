@@ -1,0 +1,47 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+<div class="card table-container">
+
+    <div class="header">
+        <a class="button" href="/financeiros/create">Novo</a>
+        <form action="/financeiros" method="GET">
+            <input
+                type="text"
+                name="filter"
+                placeholder="Descrição"
+                value={{filter}}
+            >
+            <button type="submit">Filtrar</button>
+        </form>
+    </div>
+
+    <table width="100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Pago</th>
+                <th>Tipo</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for financeiro in financeiros %}
+            <tr>
+                <td>
+                    {{financeiro.id}}
+                </td>
+                <td>{{financeiro.descricao}}</td>
+                <td>{{financeiro.valor}}</td>
+                <td>{{ "Sim" if financeiro.ispago else "Não"}}</td>
+                <td>{{ "Entrada" if financeiro.tipo == "E" else "Saída"}}</td>
+                <td><a href="/financeiros/{{financeiro.id}}">Ver</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

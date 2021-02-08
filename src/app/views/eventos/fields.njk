@@ -1,0 +1,47 @@
+ <div class="item">
+            <div>Descrição</div>
+            <div>
+                <input 
+                    type="text"
+                    name="descricao"
+                    value="{{ evento.descricao }}"
+                >
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Data de Início</div>
+            <div>
+                <input 
+                    type="date"
+                    name="datainicio"
+                    value="{{ evento.datainicio }}"
+                >
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Data de Fim</div>
+            <div>
+                <input 
+                    type="date"
+                    name="datafim"
+                    value="{{ evento.datafim }}"
+                >
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Valor</div>
+            <div>
+                <input 
+                    type="number"
+                    step="any"
+                    name="valor"
+                    value="{{ evento.valor }}"
+                >
+            </div>
+        </div>
+
+       
+        <button type="submit">Salvar</button>

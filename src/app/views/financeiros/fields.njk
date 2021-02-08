@@ -1,0 +1,76 @@
+ <div class="item">
+            <div>Descrição</div>
+            <div>
+                <input 
+                    type="text"
+                    name="descricao"
+                    value="{{ financeiro.descricao }}"
+                >
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Tipo</div>
+            <div>
+                <span> 
+                    <input 
+                        type="radio" 
+                        name="tipo" 
+                        value="E" 
+                        {% if financeiro.tipo == 'E' %}
+                            checked
+                        {% endif %}> Entrada 
+                </span>
+                <span> 
+                    <input 
+                        type="radio" 
+                        name="tipo" 
+                        value="S"
+                        {% if financeiro.tipo == 'S' %}
+                            checked
+                        {% endif %}> Saída 
+                </span>
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Valor</div>
+            <div>
+                <input 
+                    type="number"
+                    step="any"
+                    name="valor"
+                    value="{{ financeiro.valor }}"
+                >
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Pago</div>
+            <div>
+                <select name="ispago">
+                    <option value="true" {% if financeiro.ispago == "true"%}selected{%endif%}>
+                        Sim
+                    </option>
+                    
+                    <option value="false" {% if financeiro.ispago == "false"%}selected{%endif%}>
+                        Não
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Membro</div>
+            <div>
+                <select name="user">
+                    {% for user in userOptions%}}
+                    <option value="{{user.id}}" {% if financeiro.iduser == user.id%}selected{%endif%}>
+                        {{user.nome}}
+                    </option>
+                    {% endfor %}}
+                </select>
+            </div>
+        </div>
+
+        <button type="submit">Salvar</button>

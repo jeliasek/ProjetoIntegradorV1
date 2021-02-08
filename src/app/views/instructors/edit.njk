@@ -1,0 +1,38 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+<div class="card">
+    <section 
+        class="avatar" 
+        style="background: url(https://source.unsplash.com/collection/1180645/500x500) no-repeat center center / cover"></section>
+    <section class="details">
+        <form method="POST" action="/financials?_method=PUT">
+                <h3>Editar Financeiro</h3>
+
+                {% include 'financials/fields.njk' %}
+                <input type="hidden" name="id" value={{financial.id}}>
+        
+        </form>
+
+        <form id="form-delete" action="/financials?_method=DELETE" method='POST'>
+            <input type="hidden" name="id" value={{financial.id}}>
+            <button type='submit'>Deletar</button>
+
+        </form>
+
+        <script>
+
+            const formDelete = document.querySelector("#form-delete")
+            formDelete.addEventListener('submit', function(event){
+                const confirmation = confirm("Confirma exclusão dos dados?")
+                if(!confirmation){
+                    event.preventDefault()
+                }
+            })
+
+        </script>
+        
+    </section>
+</div>
+
+{% endblock content %}

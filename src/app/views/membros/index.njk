@@ -1,0 +1,48 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+<script src="{PATH}/alertify.min.js"></script>
+<div class="card table-container">
+
+    <div class="header">
+        <a class="button" href="/membros/create">Novo</a>
+        <form action="/membros" method="GET">
+            <input
+                type="text"
+                name="filter"
+                placeholder="Nome"
+                value={{filter}}
+            >
+            <button type="submit">Filtrar</button>
+        </form>
+    </div>
+
+    <table width="100%">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>ID</th>
+                <th>E-Mail</th>
+                <th>Situação</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for membro in membros %}
+            <tr>
+                <td>
+                    <span style="background-image: url({{membro.foto}})"></span>
+                    {{membro.nome}}
+                </td>
+                <td>{{membro.id}}</td>
+                
+                <td>{{membro.email}}</td>
+                <td>{{ "Ativo" if membro.situacao == "A" else "Inativo"}}</td>
+                <td><a href="/membros/{{membro.id}}">Ver</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
