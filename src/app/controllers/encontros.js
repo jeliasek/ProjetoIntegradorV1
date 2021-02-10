@@ -60,21 +60,26 @@ module.exports = {
         })
     },
     put(req, res){
-
+        error = ""
         const keys = Object.keys(req.body)
         for(key of keys){
             if(req.body[key] == ""){
                 error = "Todos os campos devem ser preenchidos!"
-                Encontro.find(req.body.id, function(encontro){
-                    return res.render("encontros/edit", {encontro, error})
-                })
             }     
         }
 
         //Organizando os dados
-        Encontro.update(req.body, function(){
-            return res.redirect(`/encontros/${req.body.id}`)
-        })
+        if(error == ""){
+            Encontro.update(req.body, function(){
+                return res.redirect(`/encontros/${req.body.id}`)
+            })
+        }else{
+            Encontro.find(req.body.id, function(encontro){
+                encontro.data = date(encontro.data).iso
+                return res.render("encontros/edit", {encontro, error})
+            })
+        }
+        
     },
     delete(req, res){
         Encontro.delete(req.body.id, function(){

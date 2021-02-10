@@ -68,9 +68,6 @@ module.exports = {
         for(key of keys){
             if(req.body[key] == ""){
                 error = "Todos os campos devem ser preenchidos!"
-                Evento.find(req.body.id, function(evento){
-                    return res.render("eventos/edit", {evento, error})
-                })
             }      
         }
         
@@ -78,6 +75,10 @@ module.exports = {
             //Organizando os dados
             Evento.update(req.body, function(){
                 return res.redirect(`/eventos/${req.body.id}`)
+            })
+        }else{
+            Evento.find(req.body.id, function(evento){
+                return res.render("eventos/edit", {evento, error})
             })
         }
     },

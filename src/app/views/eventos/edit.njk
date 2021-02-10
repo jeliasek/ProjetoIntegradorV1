@@ -24,10 +24,8 @@
 
             const formDelete = document.querySelector("#form-delete")
             formDelete.addEventListener('submit', function(event){
-                const confirmation = confirm("Confirma exclusão dos dados?")
-                if(!confirmation){
-                    event.preventDefault()
-                }
+                alertify.confirm('Exclusão', 'Confirma a Exclusão do Evento?', function(){ formDelete.submit(); }
+                ,  event.preventDefault())
             })
 
         </script>

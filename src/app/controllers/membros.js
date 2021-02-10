@@ -12,7 +12,6 @@ module.exports = {
             })
         }else{
             Membro.all(function(membros){
-
                 return res.render(`membros/index`, {membros})  
             })
         }
@@ -70,12 +69,7 @@ module.exports = {
         for(key of keys){
             if(req.body[key] == ""){
                 error = "Todos os campos devem ser preenchidos!"
-                Membro.find(req.body.id, function(membro){
-                    var bytes  = CryptoJS.AES.decrypt(membro.senha, 'secret key 123');
-                    membro.senha = bytes.toString(CryptoJS.enc.Utf8)
-                    membro.birth = date(membro.datanasc).iso
-                    return res.render("membros/edit", {membro, error})
-                })
+                console.log(`teste ${req.body.id}`)
             }      
         }
         
@@ -85,9 +79,23 @@ module.exports = {
             Membro.update(req.body, function(){
                 return res.redirect(`/membros/${req.body.id}`)
             })
+        }else{
+
+             Membro.find(req.body.id, function(membro){
+                if(!membro){
+                    res.send('Member not found')
+                }
+                var bytes  = CryptoJS.AES.decrypt(membro.senha, 'secret key 123');
+                membro.senha = bytes.toString(CryptoJS.enc.Utf8)
+               //membro.birth = date(membro.datanasc).iso
+                return res.render("membros/edit", {membro, error})
+                exit
+            })
+
         }
     },
     delete(req, res){
+        console.log("oioioi")
         var error = ''
         Membro.checkBond(req.body.id, function(isAchou){
             if(isAchou){
