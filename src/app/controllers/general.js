@@ -6,9 +6,9 @@ const { age, date } = require('../../lib/utils')
 module.exports = {
    
     home(req, res){
-        return res.render("instructors/home")
+        return res.render("general/home")
     },
     panelDirector(req, res){
-        return res.render("instructors/panelDirector")
+        return res.render("general/panelDirector")
     }
 }

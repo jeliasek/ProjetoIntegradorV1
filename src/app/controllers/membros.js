@@ -68,18 +68,17 @@ module.exports = {
         const keys = Object.keys(req.body)
         var error = ""
         for(key of keys){
-            //if(!key == "datafim"){
-                //return res.send("Please, fill all fields!")
-            //}
-
-            if(key == "nome" && req.body[key] == ""){
-                error = "Nome é obrigatório"
+            if(req.body[key] == ""){
+                error = "Todos os campos devem ser preenchidos!"
                 Membro.find(req.body.id, function(membro){
+                    var bytes  = CryptoJS.AES.decrypt(membro.senha, 'secret key 123');
+                    membro.senha = bytes.toString(CryptoJS.enc.Utf8)
+                    membro.birth = date(membro.datanasc).iso
                     return res.render("membros/edit", {membro, error})
                 })
-                
-            }
+            }      
         }
+        
 
         if(error == ""){
             //Organizando os dados
@@ -89,8 +88,22 @@ module.exports = {
         }
     },
     delete(req, res){
-        Membro.delete(req.body.id, function(){
-            return res.redirect(`/membros`)
+        var error = ''
+        Membro.checkBond(req.body.id, function(isAchou){
+            if(isAchou){
+                error = "Membro com financeiro vinculado."
+                Membro.find(req.body.id, function(membro){
+                    var bytes  = CryptoJS.AES.decrypt(membro.senha, 'secret key 123');
+                    membro.senha = bytes.toString(CryptoJS.enc.Utf8)
+                    membro.birth = date(membro.datanasc).iso
+                    return res.render("membros/edit", {membro, error})
+                })
+            }else{
+                Membro.delete(req.body.id, function(){
+                return res.redirect(`/membros`)
+            })
+            }
         })
+        
     },
 }

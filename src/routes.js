@@ -1,7 +1,6 @@
 const express = require('express')
 const routes = express.Router()
-const instructors = require('./app/controllers/instructors')
-const members = require('./app/controllers/members')
+const general = require('./app/controllers/general')
 const membros = require('./app/controllers/membros')
 const eventos = require('./app/controllers/eventos')
 const encontros = require('./app/controllers/encontros')
@@ -11,16 +10,8 @@ routes.get('/', function(req, res){
     return res.redirect("/general/home")
 })
 
-routes.get('/general/home', instructors.home)
-routes.get("/general/panelDirector", instructors.panelDirector)
-
-routes.get('/members', members.index)
-routes.get('/members/create', members.create)
-routes.post("/members", members.post)
-routes.get('/members/:id', members.show)
-routes.get('/members/:id/edit', members.edit)
-routes.put("/members", members.put)
-routes.delete("/members", members.delete)
+routes.get('/general/home', general.home)
+routes.get("/general/panelDirector", general.panelDirector)
 
 routes.get('/membros', membros.index)
 routes.get('/membros/create', membros.create)

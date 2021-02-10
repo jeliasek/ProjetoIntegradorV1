@@ -64,16 +64,22 @@ module.exports = {
     put(req, res){
 
         const keys = Object.keys(req.body)
+        var error = ""
         for(key of keys){
             if(req.body[key] == ""){
-                return res.send("Please, fill all fields!")
-            }
+                error = "Todos os campos devem ser preenchidos!"
+                Evento.find(req.body.id, function(evento){
+                    return res.render("eventos/edit", {evento, error})
+                })
+            }      
         }
-
-        //Organizando os dados
-        Evento.update(req.body, function(){
-            return res.redirect(`/eventos/${req.body.id}`)
-        })
+        
+        if(error == ""){
+            //Organizando os dados
+            Evento.update(req.body, function(){
+                return res.redirect(`/eventos/${req.body.id}`)
+            })
+        }
     },
     delete(req, res){
         Evento.delete(req.body.id, function(){

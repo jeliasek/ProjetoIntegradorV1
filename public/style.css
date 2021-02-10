@@ -306,6 +306,14 @@ td:last-child{
     width: 120px;
 }
 
+.table-container .turn-back a{
+    margin: 0;
+    margin-top:16px;
+    margin-left: 16px;
+    width: 120px;
+    
+}
+
 .table-container .header form button{
     margin:0;
 }

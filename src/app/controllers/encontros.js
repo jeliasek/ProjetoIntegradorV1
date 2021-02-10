@@ -64,8 +64,11 @@ module.exports = {
         const keys = Object.keys(req.body)
         for(key of keys){
             if(req.body[key] == ""){
-                return res.send("Please, fill all fields!")
-            }
+                error = "Todos os campos devem ser preenchidos!"
+                Encontro.find(req.body.id, function(encontro){
+                    return res.render("encontros/edit", {encontro, error})
+                })
+            }     
         }
 
         //Organizando os dados

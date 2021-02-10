@@ -102,6 +102,22 @@ module.exports = {
 
             return callback()
         })
+    },
+
+    checkBond(id, callback){
+        db.query(`SELECT * FROM membros m
+                  JOIN financeiros f
+                  ON m.id = f.iduser
+                  WHERE m.id = $1`, [id], function(err, results){
+            if(err) throw `Database Error! ${err}`
+            
+            var isAchou = false
+            if (results.rows.length > 0){
+                isAchou = true
+            }
+
+            callback(isAchou)
+        })
     }
     //instructorSelectOptions(callback){
         //db.query(`SELECT name, id FROM instructors`, function(err, results){
