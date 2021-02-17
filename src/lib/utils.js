@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken')
+const authConfig = require('../config/auth.json')
 module.exports = {
     age(timestamp){
             
@@ -27,5 +29,22 @@ module.exports = {
             birthDay: `${day}/${month}`, // iso
             format: `${day}/${month}/${year}`
         }
+    },
+
+    tokenId(token){
+        const parts = token.split(' ')
+
+        if(!parts.length === 2)
+            return res.status(401).send({ error: 'Token error' })
+        
+        const [ scheme, auxToken] = parts
+        if(!/^Bearer$/i.test(scheme))
+            return res.status(401).send({ error: 'Token malformatted' })
+        
+        jwt.verify(token, authConfig.secret, (err, decoded) => {
+            if(err) return res.status(401).send({ error: 'Token invalid' })
+
+                return decoded.id
+        })
     }
 }

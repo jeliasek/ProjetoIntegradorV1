@@ -1,0 +1,46 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+<div class="card table-container">
+
+    <div class="header">
+        <a class="button" href="/encontros/create">Novo</a>
+        <form action="/encontros" method="GET">
+            <input
+                type="text"
+                name="filter"
+                placeholder="Descrição"
+                value={{filter}}
+            >
+            <button type="submit">Filtrar</button>
+        </form>
+    </div>
+
+    <table width="100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descrição</th>
+                <th>Data</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for encontro in encontros %}
+            <tr>
+                <td>
+                    {{encontro.id}}
+                </td>
+                <td>{{encontro.descricao}}</td>
+                <td>{{encontro.data}}</td>
+                <td><a href="/encontros/{{encontro.id}}">Ver</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="turn-back">
+        <a class="button back" href="/general/home">Voltar</a>
+    </div>
+</div>
+{% endblock content %}

@@ -6,18 +6,19 @@ const membros = require('./app/controllers/membros')
 const eventos = require('./app/controllers/eventos')
 const encontros = require('./app/controllers/encontros')
 const financeiros = require("./app/controllers/financeiros")
-
+const privates = require("./app/controllers/privates")
 
 
 
 routes.get('/general/login', general.login)
 
-routes.post("/general/", general.authenticate)
+routes.post("/general", general.authenticate)
+routes.get('/general', general.home)
 routes.get("/general/panelDirector", general.panelDirector)
 //routes.use(authMiddleware)
 
-routes.post('/', function(req, res){
-    return res.redirect("/general/home")
+routes.get('/', function(req, res){
+    return res.redirect("/general/login")
     //res.send({ ok: true })
 })
 routes.get('/general/home', general.home)
@@ -55,4 +56,6 @@ routes.get('/financeiros/:id/edit', financeiros.edit)
 routes.put("/financeiros", financeiros.put)
 routes.delete("/financeiros", financeiros.delete)
 
+routes.get('/privates/eventos/:token', privates.indexEvento)
+routes.get('/privates/eventos/:id/:token', privates.showEvento)
 module.exports = routes
