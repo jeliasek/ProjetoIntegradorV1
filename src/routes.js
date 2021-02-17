@@ -1,17 +1,27 @@
 const express = require('express')
 const routes = express.Router()
+const authMiddleware = require('./middlewares/auth')
 const general = require('./app/controllers/general')
 const membros = require('./app/controllers/membros')
 const eventos = require('./app/controllers/eventos')
 const encontros = require('./app/controllers/encontros')
 const financeiros = require("./app/controllers/financeiros")
 
-routes.get('/', function(req, res){
-    return res.redirect("/general/home")
-})
 
-routes.get('/general/home', general.home)
+
+
+routes.get('/general/login', general.login)
+
+routes.post("/general/", general.authenticate)
 routes.get("/general/panelDirector", general.panelDirector)
+//routes.use(authMiddleware)
+
+routes.post('/', function(req, res){
+    return res.redirect("/general/home")
+    //res.send({ ok: true })
+})
+routes.get('/general/home', general.home)
+
 
 routes.get('/membros', membros.index)
 routes.get('/membros/create', membros.create)

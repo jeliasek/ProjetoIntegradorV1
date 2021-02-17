@@ -95,7 +95,6 @@ module.exports = {
         }
     },
     delete(req, res){
-        console.log("oioioi")
         var error = ''
         Membro.checkBond(req.body.id, function(isAchou){
             if(isAchou){

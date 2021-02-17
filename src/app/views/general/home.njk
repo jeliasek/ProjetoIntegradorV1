@@ -5,12 +5,12 @@
 <div class="card table-container">
 <div id="wrapper">
             
-            <img src="https://avatars3.githubusercontent.com/u/29541046?s=400&u=2c31b9c15350365f8c72cb07bd6df3de23c5c050&v=4" alt="Joao">
+            <img src="{{membro.foto}}" alt="Joao">
     </div>
     <div class="header">
-        <h1>Bem vindo, João Elias!</h1>
+        <h1>Bem vindo, {{ membro.nome }}!</h1>
     </div>
-
+    <input type="hidden" name="token" value="{{token}}" />
    <div class="buttonsHome">
 
        <div class="buttonHome">
@@ -35,4 +35,7 @@
 
    </div>
 </div>
+<script>
+    localStorage.setItem('token', '{{token}}')
+</script>
 {% endblock content %}

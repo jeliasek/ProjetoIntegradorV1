@@ -118,6 +118,16 @@ module.exports = {
 
             callback(isAchou)
         })
+    },
+
+    checkUser(usuario, callback){
+        db.query(`SELECT * FROM membros
+                  WHERE usuario = '${usuario}'`, function(err,results){
+                      if(err) throw `Database Error! ${err}`
+
+                      callback(results.rows[0])
+                  })
+        
     }
     //instructorSelectOptions(callback){
         //db.query(`SELECT name, id FROM instructors`, function(err, results){

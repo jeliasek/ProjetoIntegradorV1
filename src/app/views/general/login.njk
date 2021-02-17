@@ -1,0 +1,37 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+<form class="card" method="POST" action="/general">
+    <section 
+        class="avatar" 
+        style="background: url(https://www.luteranos.com.br/_arquivos/201606/big_f28301a15be388377b46673b3277e071.jpg) no-repeat center center / cover"></section>
+
+    <section class="details">
+        <h3>Login</h3>
+
+        <div class="item">
+            <div>Usuário</div>
+            <div>
+                <input 
+                    type="text"
+                    name="usuario"
+                >
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Senha</div>
+            <div>
+                <input 
+                    type="password"
+                    name="senha"
+                >
+            </div>
+        </div>
+
+       
+        <button type="submit">Entrar</button>
+
+    </section>
+</form>
+{% endblock content %}
