@@ -1,7 +1,7 @@
 //const Intl = require('intl')
 
 const Membro = require('../models/membro')
-const { age, date } = require('../../lib/utils')
+const { age, date, tokenId } = require('../../lib/utils')
 var CryptoJS = require("crypto-js")
 const jwt = require("jsonwebtoken")
 const authConfig = require("../../config/auth")
@@ -11,8 +11,19 @@ const routes = express.Router()
 module.exports = {
    
     home(req, res){
-        console.log(req.headers.authorization)
-        return res.render("general/home")
+        const token = req.params.token
+        var idMembro = 5
+        idMembro = tokenId(token)
+        console.log(`ID do Membro: ${idMembro}`)
+        Membro.find(idMembro, function(membro){
+            if (!membro) return res.send('Member not found')
+
+            membro.age = age(membro.datanasc)
+            membro.datainicio = date(membro.datainicio).format
+            
+            return res.render("general/home", {membro, token})
+        })
+    
     },
     panelDirector(req, res){
         console.log(req.body)
@@ -44,7 +55,7 @@ module.exports = {
                     //req.headers.authorization = token
                     //console.log(req.headers.authorization)
                     //res.setHeader('Authentication', token);
-                    return res.render("general/home", {token, membro})
+                    return res.redirect(`general/home/${token}`)
                     
                     
                 }

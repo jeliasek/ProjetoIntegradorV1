@@ -356,11 +356,11 @@ td:last-child{
 
 .buttonHome{
     flex: 1;
-    margin: 8px;
+    margin: 4px;
     padding: 16px 32px;
     background-color: var(--primary-color);
     border-radius: 4px;
-    margin-top: 64px;
+    margin-top: 32px;
     width: 50%;
     height: 50%;
     color: white;
@@ -386,4 +386,9 @@ td:last-child{
     grid-template-columns: 1fr 120px;
     align-items: center;
     grid-gap: 8px;
+}
+
+.headerHome h1{
+    text-align: center;
+    margin-top: -16px;
 }

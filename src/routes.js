@@ -21,7 +21,7 @@ routes.get('/', function(req, res){
     return res.redirect("/general/login")
     //res.send({ ok: true })
 })
-routes.get('/general/home', general.home)
+routes.get('/general/home/:token', general.home)
 
 
 routes.get('/membros', membros.index)
@@ -58,4 +58,11 @@ routes.delete("/financeiros", financeiros.delete)
 
 routes.get('/privates/eventos/:token', privates.indexEvento)
 routes.get('/privates/eventos/:id/:token', privates.showEvento)
+
+routes.get('/privates/encontros/:token', privates.indexEncontro)
+routes.get('/privates/encontros/:id/:token', privates.showEncontro)
+
+routes.get('/privates/financeiros/:token', privates.indexFinanceiro)
+routes.get('/privates/financeiros/:id/:token', privates.showFinanceiro)
+
 module.exports = routes

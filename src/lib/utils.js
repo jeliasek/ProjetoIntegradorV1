@@ -32,19 +32,23 @@ module.exports = {
     },
 
     tokenId(token){
-        const parts = token.split(' ')
+        console.log(`Token: ${token}`)
+        var id = 0
+        // const parts = token.split(' ')
 
-        if(!parts.length === 2)
-            return res.status(401).send({ error: 'Token error' })
+        // if(!parts.length === 2)
+            // console.log('Token Error')
         
-        const [ scheme, auxToken] = parts
-        if(!/^Bearer$/i.test(scheme))
-            return res.status(401).send({ error: 'Token malformatted' })
+        // const [ scheme, auxToken] = parts
+        // console.log(`schema: ${scheme}, auxToken: ${auxToken}`)
+        // if(!/^Bearer$/i.test(scheme))
+        // console.log('Token MalFormatted')
         
         jwt.verify(token, authConfig.secret, (err, decoded) => {
-            if(err) return res.status(401).send({ error: 'Token invalid' })
-
-                return decoded.id
+            //if(err) return res.status(401).send({ error: 'Token invalid' })
+                console.log(`Decoded.id: ${decoded.id}`)
+                id = decoded.id
         })
+        return id
     }
 }

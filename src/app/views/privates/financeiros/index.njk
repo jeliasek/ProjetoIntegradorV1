@@ -4,7 +4,7 @@
 <div class="card table-container">
 
     <div class="header">
-        <form action="/privates/encontros/{{token}}" method="GET">
+        <form action="/privates/financeiros/{{token}}" method="GET">
             <input
                 type="text"
                 name="filter"
@@ -20,22 +20,24 @@
             <tr>
                 <th>ID</th>
                 <th>Descrição</th>
-                <th>Data</th>
-                <th></th>
+                <th>Valor</th>
+                <th>Pago</th>
+                <th>Tipo</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             
-            {% for encontro in encontros %}
+            {% for financeiro in financeiros %}
             <tr>
                 <td>
-                    {{encontro.id}}
+                    {{financeiro.id}}
                 </td>
-                <td>{{encontro.descricao}}</td>
-                <td>{{encontro.data}}</td>
-                <td><a href="/privates/encontros/{{encontro.id}}/{{token}}">Ver</a></td>
-                <td><a>Participar</a></td>
+                <td>{{financeiro.descricao}}</td>
+                <td>{{financeiro.valor}}</td>
+                <td>{{ "Sim" if financeiro.ispago else "Não"}}</td>
+                <td>{{ "Entrada" if financeiro.tipo == "E" else "Saída"}}</td>
+                <td><a href="/privates/financeiros/{{financeiro.id}}/{{token}}">Ver</a></td>
             </tr>
             {% endfor %}
         </tbody>

@@ -5,9 +5,11 @@
 <div class="card table-container">
 <div id="wrapper">
             
-            <img src="{{membro.foto}}" alt="Joao">
+            <a href="/membros/{{membro.id}}">
+                <img src="{{membro.foto}}" alt="Joao">
+            </a>
     </div>
-    <div class="header">
+    <div class="headerHome">
         <h1>Bem vindo, {{ membro.nome }}!</h1>
     </div>
     <input type="hidden" name="token" value="{{token}}" />
@@ -18,11 +20,11 @@
        </div>
 
        <div class="buttonHome">
-           <a href="">ENCONTROS</a>
+           <a href="/privates/encontros/{{token}}">ENCONTROS</a>
        </div>
 
        <div class="buttonHome">
-           <a href="">FINANCEIRO</a>
+           <a href="/privates/financeiros/{{token}}">FINANCEIRO</a>
        </div>
 
        <div class="buttonHome">
