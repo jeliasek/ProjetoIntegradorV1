@@ -19,29 +19,25 @@
    <div class="buttonsHome">
        
        <div class="buttonHome" onclick="window.location='/privates/eventos/{{token}}'">
-            <span class="material-icons">today</span>
-            <a href="/privates/eventos/{{token}}">EVENTOS</a>
+            
+            <a href="/privates/eventos/{{token}}"><span class="material-icons">today</span>EVENTOS</a>
        </div>
 
        <div class="buttonHome" onclick="window.location='/privates/encontros/{{token}}'">
-            <span class="material-icons">groups</span>
-            <a href="/privates/encontros/{{token}}">ENCONTROS</a>
+            <a href="/privates/encontros/{{token}}"><span class="material-icons">groups</span>ENCONTROS</a>
        </div>
 
        <div class="buttonHome" onclick="window.location='/privates/financeiros/{{token}}'">
-            <span class="material-icons">paid</span>
-            <a href="/privates/financeiros/{{token}}">FINANCEIRO</a>
+            <a href="/privates/financeiros/{{token}}"><span class="material-icons">paid</span>FINANCEIRO</a>
        </div>
 
        <div class="buttonHome" onclick="window.location=''">
-            <span class="material-icons">mms</span>
-            <a href="">MIDIAS</a>
+            <a href=""><span class="material-icons">mms</span>MIDIAS</a>
        </div>
     
     {% if membro.isdiretor == true%}
        <div class="buttonHome" onclick="window.location='/general/panelDirector/{{token}}'">
-            <span class="material-icons">admin_panel_settings</span>
-            <a href="/general/panelDirector/{{token}}">PAINEL DIRETOR</a>
+            <a href="/general/panelDirector/{{token}}"><span class="material-icons">admin_panel_settings</span>PAINEL DIRETOR</a>
        </div>
     {%endif%}
     

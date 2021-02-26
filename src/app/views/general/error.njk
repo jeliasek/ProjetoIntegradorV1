@@ -1,0 +1,24 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+
+<div class="card table-container">
+    <div class="sair"> 
+        <a href="/general/login"><span class="material-icons">logout</span></a>
+    </div>
+<div id="wrapper">
+            
+    <a">
+        <img src="https://www.pngkit.com/png/full/228-2280416_oops-error-500-png.png" alt="Joao">
+    </a>
+    </div>
+    <div class="headerHome">
+        <h1>ERROR - Token de Autenticação Inválido.</h1>
+    </div>
+    <input type="hidden" name="token" value="{{token}}" />
+  
+</div>
+<script>
+    localStorage.setItem('token', '{{token}}')
+</script>
+{% endblock content %}

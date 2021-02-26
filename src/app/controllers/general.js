@@ -14,32 +14,42 @@ module.exports = {
         const token = req.params.token
         var idMembro = 0
         idMembro = tokenId(token)
-        Membro.find(idMembro, function(membro){
-            if (!membro) return res.send('Member not found')
+        if(idMembro == 0){
+            res.redirect("/general/error")
+        }else{
+            Membro.find(idMembro, function(membro){
 
-            membro.age = age(membro.datanasc)
-            membro.datainicio = date(membro.datainicio).format
-            
-            return res.render("general/home", {membro, token})
-        })
+                membro.age = age(membro.datanasc)
+                membro.datainicio = date(membro.datainicio).format
+                
+                return res.render("general/home", {membro, token})
+            })
+        }
+       
     
     },
     panelDirector(req, res){
         const token = req.params.token
         var idMembro = 0
         idMembro = tokenId(token)
-        Membro.find(idMembro, function(membro){
-            if (!membro) return res.send('Member not found')
+        if(idMembro == 0){
+            res.redirect("/general/error")
+        }else{
+            Membro.find(idMembro, function(membro){
 
-            membro.age = age(membro.datanasc)
-            membro.datainicio = date(membro.datainicio).format
-            
-            return res.render("general/panelDirector", {membro, token})
-        })
+                membro.age = age(membro.datanasc)
+                membro.datainicio = date(membro.datainicio).format
+                
+                return res.render("general/panelDirector", {membro, token})
+            })
+        }
         
     },
     login(req, res){
         return res.render("general/login")
+    },
+    error(req, res){
+        return res.render("general/error")
     },
      async authenticate(req, res){
         const{ usuario, senha } = req.body;
@@ -72,7 +82,6 @@ module.exports = {
                         expiresIn: 86400,
                     })
                     //req.headers.authorization = token
-                    //console.log(req.headers.authorization)
                     //res.setHeader('Authentication', token);
                     Membro.zeraTentativas(usuario, function(){
 

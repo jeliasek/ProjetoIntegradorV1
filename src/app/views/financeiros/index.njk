@@ -25,6 +25,7 @@
                 <th>Valor</th>
                 <th>Pago</th>
                 <th>Tipo</th>
+                <th>Membro</th>
                 <th></th>
             </tr>
         </thead>
@@ -36,6 +37,7 @@
                 <td>{{financeiro.valor}}</td>
                 <td>{{ "Sim" if financeiro.ispago else "Não"}}</td>
                 <td>{{ "Entrada" if financeiro.tipo == "E" else "Saída"}}</td>
+                <td>{{financeiro.nomemembro}}</td>
                 <td><a href="/financeiros/{{financeiro.id}}/{{token}}">Ver</a></td>
             </tr>
             {% endfor %}

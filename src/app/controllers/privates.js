@@ -14,140 +14,188 @@ module.exports = {
         const token = req.params.token
         var idMembro = 0
         idMembro = tokenId(token)
-        const { filter } = req.query
-        if(filter){
-            Evento.findByOfMember(idMembro, filter, function(eventos){
-                return res.render(`privates/eventos/index`, {eventos, filter, token})  
-            })
+        if(idMembro == 0){
+            res.redirect("/general/error")
         }else{
-            Evento.allOfMember(idMembro, function(eventos){
-                return res.render(`privates/eventos/index`, {eventos, token})  
-            })
+            const { filter } = req.query
+            if(filter){
+                Evento.findByOfMember(idMembro, filter, function(eventos){
+                    return res.render(`privates/eventos/index`, {eventos, filter, token})  
+                })
+            }else{
+                Evento.allOfMember(idMembro, function(eventos){
+                    return res.render(`privates/eventos/index`, {eventos, token})  
+                })
+            }
         }
     },
     
     showEvento(req, res){
         const token = req.params.token
-        Evento.find(req.params.id, function(evento){
-            if (!evento) return res.send('Evento not found')
+        var idMembro = 0
+        idMembro = tokenId(token)
+        if(idMembro == 0){
+            res.redirect("/general/error")
+        }else{
+            Evento.find(req.params.id, function(evento){
+                if (!evento) return res.send('Evento not found')
 
-            evento.datainicio = date(evento.datainicio).format
-            evento.datafim = date(evento.datafim).format
-            return res.render('privates/eventos/show', {evento, token})
-        })
+                evento.datainicio = date(evento.datainicio).format
+                evento.datafim = date(evento.datafim).format
+                return res.render('privates/eventos/show', {evento, token})
+            })
+        }
     },
 
     indexEncontro(req, res){
         const token = req.params.token
         var idMembro = 0
         idMembro = tokenId(token)
-        const { filter } = req.query
-        if(filter){
-            Encontro.findBy(filter, function(encontros){
-                for(var encontro in encontros){
-                    encontros[encontro].data = date(encontros[encontro].data).format
-                }
-                return res.render(`privates/encontros/index`, {encontros, filter, token})  
-            })
+        if(idMembro == 0){
+            res.redirect("/general/error")
         }else{
-            Encontro.allOfMember(idMembro, function(encontros){
-                for(var encontro in encontros){
-                    encontros[encontro].data = date(encontros[encontro].data).format
-                }
-                return res.render(`privates/encontros/index`, {encontros, token})  
-            })
+            const { filter } = req.query
+            if(filter){
+                Encontro.findBy(filter, function(encontros){
+                    for(var encontro in encontros){
+                        encontros[encontro].data = date(encontros[encontro].data).format
+                    }
+                    return res.render(`privates/encontros/index`, {encontros, filter, token})  
+                })
+            }else{
+                Encontro.allOfMember(idMembro, function(encontros){
+                    for(var encontro in encontros){
+                        encontros[encontro].data = date(encontros[encontro].data).format
+                    }
+                    return res.render(`privates/encontros/index`, {encontros, token})  
+                })
+            }
         }
     },
 
     showEncontro(req, res){
         const token = req.params.token
-        Encontro.find(req.params.id, function(encontro){
-            if (!encontro) return res.send('Encontro not found')
+        var idMembro = 0
+        idMembro = tokenId(token)
+        if(idMembro == 0){
+            res.redirect("/general/error")
+        }else{
+            Encontro.find(req.params.id, function(encontro){
+                if (!encontro) return res.send('Encontro not found')
 
-            encontro.data = date(encontro.data).format
-            return res.render('privates/encontros/show', {encontro, token})
-        })
+                encontro.data = date(encontro.data).format
+                return res.render('privates/encontros/show', {encontro, token})
+            })
+        }
     },
     indexFinanceiro(req, res){
         const token = req.params.token
         var idMembro = 0
         idMembro = tokenId(token)
-        const { filter } = req.query
-        if(filter){
-            Financeiro.findByOfMember(filter,idMembro,function(financeiros){
-                return res.render(`privates/financeiros/index`, {financeiros, filter, token})  
-            })
+        if(idMembro == 0){
+            res.redirect("/general/error")
         }else{
-            Financeiro.allOfMember(idMembro, function(financeiros){
-                return res.render(`privates/financeiros/index`, {financeiros, token})  
-            })
+            const { filter } = req.query
+            if(filter){
+                Financeiro.findByOfMember(filter,idMembro,function(financeiros){
+                    return res.render(`privates/financeiros/index`, {financeiros, filter, token})  
+                })
+            }else{
+                Financeiro.allOfMember(idMembro, function(financeiros){
+                    return res.render(`privates/financeiros/index`, {financeiros, token})  
+                })
+            }
         }
     },
 
     showFinanceiro(req, res){
         const token = req.params.token
-        Financeiro.find(req.params.id, function(financeiro){
-            if (!financeiro) return res.send('Financeiro not found')
+        var idMembro = 0
+        idMembro = tokenId(token)
+        if(idMembro == 0){
+            res.redirect("/general/error")
+        }else{
+            Financeiro.find(req.params.id, function(financeiro){
+                if (!financeiro) return res.send('Financeiro not found')
 
-           // encontro.datainicio = date(encontro.datainicio).format
-            //encontro.datafim = date(encontro.datafim).format
-            return res.render('privates/financeiros/show', {financeiro, token})
-        })
+            // encontro.datainicio = date(encontro.datainicio).format
+                //encontro.datafim = date(encontro.datafim).format
+                return res.render('privates/financeiros/show', {financeiro, token})
+            })
+        }
     },
 
     showMembro(req, res){
         const token = req.params.token
-        Membro.find(req.params.id, function(membro){
-            if (!membro) return res.send('Membro not found')
+        var idMembro = 0
+        idMembro = tokenId(token)
+        if(idMembro == 0){
+            res.redirect("/general/error")
+        }else{
+            Membro.find(req.params.id, function(membro){
+                if (!membro) return res.send('Membro not found')
 
-            membro.age = age(membro.datanasc)
-            membro.datainicio = date(membro.datainicio).format
-            return res.render('privates/membros/show', {membro, token})
-        })
+                membro.age = age(membro.datanasc)
+                membro.datainicio = date(membro.datainicio).format
+                return res.render('privates/membros/show', {membro, token})
+            })
+        }
     },
 
     editMembro(req, res){
         const token = req.params.token
-        Membro.find(req.params.id, function(membro){
-            if (!membro) return res.send('Membro not found')
-            var bytes  = CryptoJS.AES.decrypt(membro.senha, 'secret key 123');
-            membro.senha = bytes.toString(CryptoJS.enc.Utf8)
-            membro.birth = date(membro.datanasc).iso
-              //Membro.instructorSelectOptions(function(options){
-                return res.render("privates/membros/edit", {membro, token})
-           // })
-            
-        })
+        var idMembro = 0
+        idMembro = tokenId(token)
+        if(idMembro == 0){
+            res.redirect("/general/error")
+        }else{
+            Membro.find(req.params.id, function(membro){
+                if (!membro) return res.send('Membro not found')
+                var bytes  = CryptoJS.AES.decrypt(membro.senha, 'secret key 123');
+                membro.senha = bytes.toString(CryptoJS.enc.Utf8)
+                membro.birth = date(membro.datanasc).iso
+                //Membro.instructorSelectOptions(function(options){
+                    return res.render("privates/membros/edit", {membro, token})
+            // })
+                
+            })
+        }
     },
 
     put(req, res){
         const token = req.params.token
-        const keys = Object.keys(req.body)
-        var error = ""
-        for(key of keys){
-            if(req.body[key] == ""){
-                error = "Todos os campos devem ser preenchidos!"
-            }      
-        }
-        
-
-        if(error == ""){
-            //Organizando os dados
-            Membro.updatePrivate(req.body, function(){
-                return res.redirect(`/privates/membros/${req.body.id}/${token}`)
-            })
+        var idMembro = 0
+        idMembro = tokenId(token)
+        if(idMembro == 0){
+            res.redirect("/general/error")
         }else{
+            const keys = Object.keys(req.body)
+            var error = ""
+            for(key of keys){
+                if(req.body[key] == ""){
+                    error = "Todos os campos devem ser preenchidos!"
+                }      
+            }
+            
 
-             Membro.find(req.body.id, function(membro){
-                if(!membro){
-                    res.send('Member not found')
-                }
-                var bytes  = CryptoJS.AES.decrypt(membro.senha, 'secret key 123');
-                membro.senha = bytes.toString(CryptoJS.enc.Utf8)
-               //membro.birth = date(membro.datanasc).iso
-                return res.render("privates/membros/edit", {membro, error, token})
-            })
+            if(error == ""){
+                //Organizando os dados
+                Membro.updatePrivate(req.body, function(){
+                    return res.redirect(`/privates/membros/${req.body.id}/${token}`)
+                })
+            }else{
 
+                Membro.find(req.body.id, function(membro){
+                    if(!membro){
+                        res.send('Member not found')
+                    }
+                    var bytes  = CryptoJS.AES.decrypt(membro.senha, 'secret key 123');
+                    membro.senha = bytes.toString(CryptoJS.enc.Utf8)
+                //membro.birth = date(membro.datanasc).iso
+                    return res.render("privates/membros/edit", {membro, error, token})
+                })
+
+            }
         }
     },
 
@@ -157,28 +205,38 @@ module.exports = {
         const idEncontro = req.params.id
         var idMembro = 0
         idMembro = tokenId(token)
-        Membro.find(idMembro, function(membro){
-            if (!membro) return res.send('Member not found')
-        })
+        if(idMembro == 0){
+            res.redirect("/general/error")
+        }else{
+            Membro.find(idMembro, function(membro){
+                if (!membro) return res.send('Member not found')
+            })
 
-        Private.participarEncontro(idEncontro, idMembro, function(participante){
-            
-            return res.redirect(`/privates/encontros/${token}`)
-        })
+            Private.participarEncontro(idEncontro, idMembro, function(participante){
+                
+                return res.redirect(`/privates/encontros/${token}`)
+            })
+        }
     },
 
     participantesEncontro(req, res){
         
         const token = req.params.token
-        const idEncontro = req.params.id
-        var descricaoEncontro
-        Private.RetornaDescricaoEncontro(idEncontro, function(descricao){
-            
-            descricaoEncontro = descricao.descricao
-        })
-        Private.RetornaparticipantesEncontro(idEncontro, function(participantes){
-            return res.render(`privates/encontros/participantes`, {token, participantes, descricaoEncontro})
-        })
+        var idMembro = 0
+        idMembro = tokenId(token)
+        if(idMembro == 0){
+            res.redirect("/general/error")
+        }else{
+            const idEncontro = req.params.id
+            var descricaoEncontro
+            Private.RetornaDescricaoEncontro(idEncontro, function(descricao){
+                
+                descricaoEncontro = descricao.descricao
+            })
+            Private.RetornaparticipantesEncontro(idEncontro, function(participantes){
+                return res.render(`privates/encontros/participantes`, {token, participantes, descricaoEncontro})
+            })
+        }
     },
 
     participarEvento(req, res){
@@ -186,46 +244,64 @@ module.exports = {
         const idEvento = req.params.id
         var idMembro = 0
         idMembro = tokenId(token)
-        Membro.find(idMembro, function(membro){
-            if (!membro) return res.send('Member not found')
-        })
+        if(idMembro == 0){
+            res.redirect("/general/error")
+        }else{
+            Membro.find(idMembro, function(membro){
+                if (!membro) return res.send('Member not found')
+            })
 
-        Private.participarEvento(idEvento, idMembro, function(participante){
-            
-            return res.redirect(`/privates/eventos/${token}`)
-        })
+            Private.participarEvento(idEvento, idMembro, function(participante){
+                
+                return res.redirect(`/privates/eventos/${token}`)
+            })
+        }
     },
     retirarEvento(req, res){
         const token = req.params.token
         const idEvento = req.params.id
         var idMembro = 0
         idMembro = tokenId(token)
-        Private.retirarEvento(idEvento, idMembro, function(){
-            return res.redirect(`/privates/eventos/${token}`)
-        })
+        if(idMembro == 0){
+            res.redirect("/general/error")
+        }else{
+            Private.retirarEvento(idEvento, idMembro, function(){
+                return res.redirect(`/privates/eventos/${token}`)
+            })
+        }
     },
 
     participantesEvento(req, res){
         
         const token = req.params.token
-        const idEvento = req.params.id
-        var descricaoEvento
-        Private.RetornaDescricaoEvento(idEvento, function(descricao){
-            
-            descricaoEvento = descricao.descricao
-        })
-        Private.RetornaparticipantesEvento(idEvento, function(participantes){
-            return res.render(`privates/eventos/participantes`, {token, participantes, descricaoEvento})
-        })
+        var idMembro = 0
+        idMembro = tokenId(token)
+        if(idMembro == 0){
+            res.redirect("/general/error")
+        }else{
+            const idEvento = req.params.id
+            var descricaoEvento
+            Private.RetornaDescricaoEvento(idEvento, function(descricao){
+                
+                descricaoEvento = descricao.descricao
+            })
+            Private.RetornaparticipantesEvento(idEvento, function(participantes){
+                return res.render(`privates/eventos/participantes`, {token, participantes, descricaoEvento})
+            })
+        }
     },
     retirarEncontro(req, res){
         const token = req.params.token
         const idEncontro = req.params.id
         var idMembro = 0
         idMembro = tokenId(token)
-        Private.retirarEncontro(idEncontro, idMembro, function(){
-            return res.redirect(`/privates/encontros/${token}`)
-        })
+        if(idMembro == 0){
+            res.redirect("/general/error")
+        }else{
+            Private.retirarEncontro(idEncontro, idMembro, function(){
+                return res.redirect(`/privates/encontros/${token}`)
+            })
+        }
     }
     
 }

@@ -44,7 +44,7 @@ module.exports = {
         // console.log('Token MalFormatted')
         
         jwt.verify(token, authConfig.secret, (err, decoded) => {
-            //if(err) return res.status(401).send({ error: 'Token invalid' })
+            if(err) return id
                 id = decoded.id
         })
         return id

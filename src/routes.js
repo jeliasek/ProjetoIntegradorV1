@@ -11,7 +11,7 @@ const privates = require("./app/controllers/privates")
 
 
 routes.get('/general/login', general.login)
-
+routes.get('/general/error', general.error)
 routes.post("/general", general.authenticate)
 routes.get('/general', general.login)
 routes.get("/general/panelDirector/:token", general.panelDirector)

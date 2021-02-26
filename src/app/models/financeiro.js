@@ -20,10 +20,11 @@ module.exports = {
     },
     findBy(filter, callback){
         
-        db.query(`SELECT financeiros.*, m.nome as nomemembro
+        db.query(`SELECT f.*, m.nome as nomemembro
                   FROM financeiros f JOIN membros m ON
                   f.iduser = m.id
                   WHERE f.descricao ILIKE '%${filter}%'
+                  OR m.nome ILIKE '%${filter}%'
                   ORDER BY f.descricao asc`, function(err,results){
             if(err) throw `Database Error! ${err}`
 
@@ -32,11 +33,11 @@ module.exports = {
     },
     findByOfMember(filter, id, callback){
         
-        db.query(`SELECT financeiros.*, m.nome as nomemembro
+        db.query(`SELECT f.*, m.nome as nomemembro
                   FROM financeiros f JOIN membros m ON
                   f.iduser = m.id
                   WHERE f.descricao ILIKE '%${filter}%'
-                  AND b.id = ${id}
+                  AND m.id = ${id}
                   ORDER BY f.descricao asc`, function(err,results){
             if(err) throw `Database Error! ${err}`
 

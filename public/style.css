@@ -347,12 +347,8 @@ td:last-child{
 }
 
 .buttonsHome{
-    display: flex;
-    flex-direction:row;
-    flex-wrap:wrap;
-    justify-items: center;
-    align-items: center;
-    grid-template-columns: 1fr 1fr;
+    display: block;
+   text-align: center;
 }
 
 .buttonHome{
@@ -361,16 +357,16 @@ td:last-child{
     padding: 16px 32px;
     background-color: var(--primary-color);
     border-radius: 4px;
-    margin-top: 32px;
-    width: 50%;
-    height: 50%;
+    margin-top: 8px;
+    width: 22%;
+    height: 25%;
     color: white;
     font-size: 16px;
     text-align: center;
     display: grid;
     justify-items: center;
     align-items: center;
-
+    display: inline-block;
     
 }
 
@@ -412,4 +408,8 @@ td:last-child{
 .sair a{
     position:absolute;
 	right:0px;
+}
+
+.material-icons{
+    width: -webkit-fill-available;
 }
