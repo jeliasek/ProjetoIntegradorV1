@@ -32,7 +32,6 @@ module.exports = {
     },
 
     tokenId(token){
-        console.log(`Token: ${token}`)
         var id = 0
         // const parts = token.split(' ')
 
@@ -46,7 +45,6 @@ module.exports = {
         
         jwt.verify(token, authConfig.secret, (err, decoded) => {
             //if(err) return res.status(401).send({ error: 'Token invalid' })
-                console.log(`Decoded.id: ${decoded.id}`)
                 id = decoded.id
         })
         return id

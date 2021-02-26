@@ -3,9 +3,29 @@ const { age, date } = require('../../lib/utils')
 
 
 module.exports = {
-    all(callback){
+    async all(callback){
 
         db.query(`SELECT * FROM eventos ORDER BY datainicio`, function(err,results){
+            if(err) throw `Database Error! ${err}`
+            
+            callback(results.rows)
+        })
+    },
+    allOfMember(idMembro, callback){
+        db.query(`SELECT e.id AS id, e.descricao AS descricao, e.valor AS valor, me.idmembro AS participa FROM eventos e LEFT JOIN membrosevento me on me.idevento = e.id AND me.idmembro = ${idMembro}
+                  WHERE idmembro isNull OR idmembro = ${idMembro}`, function(err,results){
+            if(err) throw `Database Error! ${err}`
+            
+            callback(results.rows)
+        })
+    },
+    findByOfMember(idMembro, filter, callback){
+        
+        db.query(`SELECT e.id AS id, e.descricao AS descricao, e.valor AS valor, me.idmembro AS participa 
+                  FROM eventos e LEFT JOIN membrosevento me on me.idevento = e.id AND me.idmembro = ${idMembro}
+                  WHERE e.descricao ILIKE '%${filter}%'
+                  AND (me.idmembro isNull OR me.idmembro = ${idMembro})
+                  ORDER BY e.datainicio asc`, function(err,results){
             if(err) throw `Database Error! ${err}`
             
             callback(results.rows)

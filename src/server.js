@@ -1,3 +1,4 @@
+require('./config/dotenv')
 const express = require('express')
 const nunjucks = require('nunjucks')
 const routes = require('./routes')
@@ -18,6 +19,7 @@ nunjucks.configure('src/app/views', {
     noCache: true
 
 })
+
 
 server.listen(5000, function(){
     console.log("Server is Running")

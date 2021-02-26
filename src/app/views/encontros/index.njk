@@ -2,10 +2,10 @@
 
 {% block content %}
 <div class="card table-container">
-
+    
     <div class="header">
-        <a class="button" href="/encontros/create">Novo</a>
-        <form action="/encontros" method="GET">
+        <a class="button" href="/encontros/create/{{token}}">Novo</a>
+        <form action="/encontros/{{token}}" method="GET">
             <input
                 type="text"
                 name="filter"
@@ -34,13 +34,13 @@
                 </td>
                 <td>{{encontro.descricao}}</td>
                 <td>{{encontro.data}}</td>
-                <td><a href="/encontros/{{encontro.id}}">Ver</a></td>
+                <td><a href="/encontros/{{encontro.id}}/{{token}}">Ver</a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <div class="turn-back">
-        <a class="button back" href="/general/panelDirector">Voltar</a>
+        <a class="button back" href="/general/panelDirector/{{token}}">Voltar</a>
     </div>
 </div>
 {% endblock content %}

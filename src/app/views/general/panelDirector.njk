@@ -2,32 +2,53 @@
 
 {% block content %}
 <div class="card table-container">
+<div class="sair">
+    
+    <a href="/general/login"><span class="material-icons">logout</span></a>
+</div>
+    <div id="wrapper">    
+        <a href="/membros/{{membro.id}}">
+            <img src="{{membro.foto}}" alt="Joao">
+        </a>
+    </div>
 
-    <div class="header">
+    <div class="headerHome">
         <h1>Bem vindo, Diretor!</h1>
     </div>
 
    <div class="buttonsHome">
 
-       <div class="buttonHome">
-           <a href="/eventos">EVENTOS</a>
+       <div class="buttonHome" onclick="window.location='/eventos/{{token}}'">
+            <span class="material-icons">today</span>
+            <a href="/eventos/{{token}}">EVENTOS</a>
        </div>
 
-       <div class="buttonHome">
-           <a href="/encontros">ENCONTROS</a>
+       <div class="buttonHome" onclick="window.location='/encontros/{{token}}'">
+            <span class="material-icons">groups</span>
+            <a href="/encontros/{{token}}">ENCONTROS</a>
        </div>
 
-       <div class="buttonHome">
-           <a href="/financeiros">FINANCEIRO</a>
+       <div class="buttonHome" onclick="window.location='/financeiros/{{token}}'">
+            <span class="material-icons">paid</span>
+            <a href="/financeiros/{{token}}">FINANCEIRO</a>
        </div>
 
-       <div class="buttonHome">
-           <a href=""> MIDIAS</a>
+       <div class="buttonHome" onclick="window.location=''">
+            <span class="material-icons">mms</span>
+            <a href=""> MIDIAS</a>
        </div>
 
-       <div class="buttonHome">
-           <a href="/membros">USUÁRIOS</a>
+        <div class="buttonHome" onclick="window.location='/general/home/{{token}}'">
+            <span class="material-icons">reply</span>
+            <a href="/general/home/{{token}}">VOLTAR</a>
        </div>
+       
+       <div class="buttonHome" onclick="window.location='/membros/{{token}}'">
+            <span class="material-icons">group_add</span>
+            <a href="/membros/{{token}}">USUÁRIOS</a>
+       </div>
+
+      
 
    </div>
 </div>

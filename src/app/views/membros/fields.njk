@@ -106,4 +106,19 @@
             </div>
         </div>
 
+        <div class="item">
+            <div>Diretor</div>
+            <div>
+                <select name="isdiretor">
+                    <option value="false" {% if membro.isdiretor == "false"%}selected{%endif%}>
+                        Não
+                    </option>
+                    <option value="true" {% if membro.isdiretor == "true"%}selected{%endif%}>
+                        Sim
+                    </option>
+                </select>
+            </div>
+        </div>
+
         <button type="submit">Salvar</button>
+        <a href="/membros/{{token}}" class="button">Voltar</a>

@@ -3,8 +3,8 @@
 {% block content %}
 <div class="card table-container">
     <div class="header">
-        <a class="button" href="/members/create">Novo</a>
-        <form action="/members" method="GET">
+        <a class="button" href="/members/create/{{token}}">Novo</a>
+        <form action="/members/{{token}}" method="GET">
             <input
                 type="text"
                 name="filter"
@@ -35,7 +35,7 @@
                 <td>{{member.email}}</td>
                 <td>{{member.weight}} kg</td>
                 <td>{{member.height}} cm</td>
-                <td><a href="/members/{{member.id}}">Ver</a></td>
+                <td><a href="/members/{{member.id}}/{{token}}">Ver</a></td>
             </tr>
             {% endfor %}
         </tbody>

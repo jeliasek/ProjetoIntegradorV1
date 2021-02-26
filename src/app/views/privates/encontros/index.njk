@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="card table-container">
-
+   
     <div class="header">
         <form action="/privates/encontros/{{token}}" method="GET">
             <input
@@ -18,8 +18,7 @@
     <table width="100%">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Descrição</th>
+                <th>Descrição do Encontro</th>
                 <th>Data</th>
                 <th></th>
                 <th></th>
@@ -29,13 +28,17 @@
             
             {% for encontro in encontros %}
             <tr>
-                <td>
-                    {{encontro.id}}
-                </td>
                 <td>{{encontro.descricao}}</td>
                 <td>{{encontro.data}}</td>
                 <td><a href="/privates/encontros/{{encontro.id}}/{{token}}">Ver</a></td>
-                <td><a>Participar</a></td>
+               
+                {% if encontro.participa < 1 %}
+                    <td><a href="/privates/encontros/participar/{{encontro.id}}/{{token}}">Participar</a></td>
+                {%endif%}
+
+                {% if encontro.participa > 0 %}
+                    <td><a href="/privates/encontros/retirar/{{encontro.id}}/{{token}}">Retirar-se</a></td>
+                {%endif%}
             </tr>
             {% endfor %}
         </tbody>

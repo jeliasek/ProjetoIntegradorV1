@@ -11,6 +11,16 @@ module.exports = {
             callback(results.rows)
         })
     },
+    allOfMember(idMembro, callback){
+
+        db.query(`SELECT e.id AS id, e.descricao AS descricao, e.data AS data, me.idmembro AS participa 
+                  FROM encontros e LEFT JOIN membrosencontro me on me.idencontro = e.id AND me.idmembro = ${idMembro}
+                  WHERE idmembro isNull OR idmembro = ${idMembro}`, function(err,results){
+            if(err) throw `Database Error! ${err}`
+            
+            callback(results.rows)
+        })
+    },
     findBy(filter, callback){
         
         db.query(`SELECT encontros.*

@@ -5,28 +5,30 @@ const { age, date } = require('../../lib/utils')
 
 module.exports = {
     index(req, res){
+        const token = req.params.token
         const { filter } = req.query
         if(filter){
             Financeiro.findBy(filter, function(financeiros){
-                return res.render(`financeiros/index`, {financeiros, filter})  
+                return res.render(`financeiros/index`, {financeiros, filter, token})  
             })
         }else{
             Financeiro.all(function(financeiros){
-                return res.render(`financeiros/index`, {financeiros})  
+                return res.render(`financeiros/index`, {financeiros, token})  
             })
         }
         
         
     },
     create(req, res){
+        const token = req.params.token
         Financeiro.usersSelectOptions(function(options){
-            return res.render("financeiros/create", {userOptions: options})
+            return res.render("financeiros/create", {userOptions: options, token})
         })
         
     },
     post(req, res){
         //Usar req.body
-
+        const token = req.params.token
         const keys = Object.keys(req.body)
 
         for(key of keys){
@@ -38,31 +40,33 @@ module.exports = {
         //Organizando os dados
 
         Financeiro.create(req.body, function(financeiro){
-            return res.redirect(`/financeiros/${financeiro.id}`)
+            return res.redirect(`/financeiros/${financeiro.id}/${token}`)
         })
         
     },
     show(req, res){
+        const token = req.params.token
         Financeiro.find(req.params.id, function(financeiro){
             if (!financeiro) return res.send('Financeiro not found')
 
-            return res.render('financeiros/show', {financeiro})
+            return res.render('financeiros/show', {financeiro, token})
         })
     },
     edit(req, res){
+        const token = req.params.token
         Financeiro.find(req.params.id, function(financeiro){
             if (!financeiro) return res.send('Financeiro not found')
 
            // member.birth = date(financeiro.birth).iso
             
             Financeiro.usersSelectOptions(function(options){
-                return res.render("financeiros/edit", {financeiro, userOptions: options})
+                return res.render("financeiros/edit", {financeiro, userOptions: options, token})
             })
             
         })
     },
     put(req, res){
-
+        const token = req.params.token
         const keys = Object.keys(req.body)
 
         for(key of keys){
@@ -73,12 +77,13 @@ module.exports = {
 
         //Organizando os dados
         Financeiro.update(req.body, function(){
-            return res.redirect(`/financeiros/${req.body.id}`)
+            return res.redirect(`/financeiros/${req.body.id}/${token}`)
         })
     },
     delete(req, res){
+        const token = req.params.token
         Financeiro.delete(req.body.id, function(){
-            return res.redirect(`/financeiros`)
+            return res.redirect(`/financeiros/${token}`)
         })
     },
 }

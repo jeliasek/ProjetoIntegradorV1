@@ -7,7 +7,8 @@
         style="background: url(https://source.unsplash.com/collection/1180645/500x500) no-repeat center center / cover"></section>
 
     <section class="details">
-        <h3>Detalhes Eventoo</h3>
+        
+        <h3>Detalhes Evento</h3>
 
         <div class="item">
             <div>Descricao</div>
@@ -29,8 +30,8 @@
             <div>{{evento.valor}}</div>
         </div>
 
-        <a href="/eventos/{{ evento.id }}/edit" class="button">Editar</a>
-        <a href="/eventos" class="button">Voltar</a>
+        <a href="/eventos/{{ evento.id }}/edit/{{token}}" class="button">Editar</a>
+        <a href="/eventos/{{token}}" class="button">Voltar</a>
 
     </section>
 </div>

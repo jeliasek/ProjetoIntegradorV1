@@ -4,7 +4,15 @@ const { age, date } = require('../../lib/utils')
 module.exports = {
     all(callback){
 
-        db.query(`SELECT * FROM financeiros ORDER BY descricao`, function(err,results){
+        db.query(`SELECT f.*, m.nome as nomemembro FROM financeiros f JOIN Membros m ON f.iduser = m.id ORDER BY descricao`, function(err,results){
+            if(err) throw `Database Error! ${err}`
+
+            callback(results.rows)
+        })
+    },
+    allOfMember(id,callback){
+
+        db.query(`SELECT f.*, m.nome as nomemembro FROM financeiros f JOIN Membros m ON f.iduser = m.id where m.id = ${id} ORDER BY descricao`, function(err,results){
             if(err) throw `Database Error! ${err}`
 
             callback(results.rows)
@@ -12,10 +20,24 @@ module.exports = {
     },
     findBy(filter, callback){
         
-        db.query(`SELECT financeiros.*
-                  FROM financeiros
-                  WHERE financeiros.descricao ILIKE '%${filter}%'
-                  ORDER BY financeiros.descricao asc`, function(err,results){
+        db.query(`SELECT financeiros.*, m.nome as nomemembro
+                  FROM financeiros f JOIN membros m ON
+                  f.iduser = m.id
+                  WHERE f.descricao ILIKE '%${filter}%'
+                  ORDER BY f.descricao asc`, function(err,results){
+            if(err) throw `Database Error! ${err}`
+
+            callback(results.rows)
+        })
+    },
+    findByOfMember(filter, id, callback){
+        
+        db.query(`SELECT financeiros.*, m.nome as nomemembro
+                  FROM financeiros f JOIN membros m ON
+                  f.iduser = m.id
+                  WHERE f.descricao ILIKE '%${filter}%'
+                  AND b.id = ${id}
+                  ORDER BY f.descricao asc`, function(err,results){
             if(err) throw `Database Error! ${err}`
 
             callback(results.rows)

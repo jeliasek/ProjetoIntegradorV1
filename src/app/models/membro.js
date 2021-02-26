@@ -34,8 +34,9 @@ module.exports = {
                 logradouro,
                 usuario,
                 senha,
-                situacao
-            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+                situacao,
+                isdiretor
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
             RETURNING id
         `
        
@@ -48,7 +49,8 @@ module.exports = {
             data.logradouro,
             data.usuario,
             CryptoJS.AES.encrypt(data.senha, 'secret key 123').toString(),
-            data.situacao
+            data.situacao,
+            data.isdiretor
         ]
 
         db.query(query, values, function(err, results){
@@ -68,6 +70,7 @@ module.exports = {
         })
         
     },
+    
     update(data, callback){
         const query = `
         UPDATE membros SET
@@ -76,8 +79,10 @@ module.exports = {
             foto=($3),
             email=($4),
             logradouro=($5),
-            situacao=($6)
-        WHERE id = $7
+            situacao=($6),
+            isdiretor=($7),
+            senha=($8)
+        WHERE id = $9
         `
         const values = [
             data.nome,
@@ -86,9 +91,41 @@ module.exports = {
             data.email,
             data.logradouro,
             data.situacao,
+            data.isdiretor,
+            CryptoJS.AES.encrypt(data.senha, 'secret key 123').toString(),
             data.id
         ]
 
+
+        db.query(query, values, function(err, results){
+            if(err) throw `Database Error! ${err}`
+
+            callback()
+        })
+    },
+    updatePrivate(data, callback){
+
+        const query = `
+        UPDATE membros SET
+            nome=($1),
+            datanasc=($2),
+            foto=($3),
+            email=($4),
+            logradouro=($5),
+            situacao=($6),
+            senha=($7)
+        WHERE id = $8
+        `
+        const values = [
+            data.nome,
+            date(data.datanasc).iso,
+            data.foto,
+            data.email,
+            data.logradouro,
+            data.situacao,
+            CryptoJS.AES.encrypt(data.senha, 'secret key 123').toString(),
+            data.id
+        ]
 
         db.query(query, values, function(err, results){
             if(err) throw `Database Error! ${err}`
@@ -128,6 +165,45 @@ module.exports = {
                       callback(results.rows[0])
                   })
         
+    },
+    incrementaTentativa(usuario, callback){
+        const query = `
+        UPDATE membros SET
+            tentativas = tentativas + 1
+        WHERE usuario = '${usuario}'
+        `
+
+        db.query(query, function(err, results){
+            if(err) throw `Database Error! ${err}`
+
+            callback()
+        })
+    },
+    zeraTentativas(usuario, callback){
+        const query = `
+        UPDATE membros SET
+            tentativas = 0
+        WHERE usuario = '${usuario}'
+        `
+
+        db.query(query, function(err, results){
+            if(err) throw `Database Error! ${err}`
+
+            callback()
+        })
+    },
+    zeraTentativasId(id, callback){
+        const query = `
+        UPDATE membros SET
+            tentativas = 0
+        WHERE id = ${id}
+        `
+
+        db.query(query, function(err, results){
+            if(err) throw `Database Error! ${err}`
+
+            callback()
+        })
     }
     //instructorSelectOptions(callback){
         //db.query(`SELECT name, id FROM instructors`, function(err, results){

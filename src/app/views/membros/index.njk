@@ -3,10 +3,10 @@
 {% block content %}
 <script src="{PATH}/alertify.min.js"></script>
 <div class="card table-container">
-
+    
     <div class="header">
-        <a class="button" href="/membros/create">Novo</a>
-        <form action="/membros" method="GET">
+        <a class="button" href="/membros/create/{{token}}">Novo</a>
+        <form action="/membros/{{token}}" method="GET">
             <input
                 type="text"
                 name="filter"
@@ -39,14 +39,14 @@
                 
                 <td>{{membro.email}}</td>
                 <td>{{ "Ativo" if membro.situacao == "A" else "Inativo"}}</td>
-                <td><a href="/membros/{{membro.id}}">Ver</a></td>
+                <td><a href="/membros/{{membro.id}}/{{token}}">Ver</a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
      <div class="turn-back">
-        <a class="button back" href="/general/panelDirector">Voltar</a>
+        <a class="button back" href="/general/panelDirector/{{token}}">Voltar</a>
     </div>
 </div>
 {% endblock content %}

@@ -54,8 +54,8 @@
             <div>{{member.instructor_name}}</div>
         </div>
 
-        <a href="/members/{{ member.id }}/edit" class="button">Editar</a>
-
+        <a href="/members/{{ member.id }}/edit/{{token}}" class="button">Editar</a>
+        <a href="/financeiros/{{token}}" class="button">Voltar</a>
     </section>
 </div>
 {% endblock content %}

@@ -1,0 +1,42 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+<div class="card table-container">
+    <div class="headerHome">
+        <h1>{{descricaoEncontro}}</h1>
+    </div>
+    <div class="header">
+        
+    </div>
+
+    <table width="100%">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>ID</th>
+                <th>E-Mail</th>
+                <th>Situação</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for participante in participantes %}
+            <tr>
+                <td>
+                    <span style="background-image: url({{participante.foto}})"></span>
+                    {{participante.nome}}
+                </td>
+                <td>{{participante.id}}</td>
+                
+                <td>{{participante.email}}</td>
+                <td>{{ "Ativo" if participante.situacao == "A" else "Inativo"}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="turn-back">
+        <a class="button back" href="/privates/encontros/{{token}}">Voltar</a>
+    </div>
+</div>
+{% endblock content %}

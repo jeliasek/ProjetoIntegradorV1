@@ -4,9 +4,9 @@
 <div class="card">
     <section 
         class="avatar" 
-        style="background: url(https://source.unsplash.com/collection/1180645/500x500) no-repeat center center / cover"></section>
+        style="background: url(https://source.unsplash.com/collection/1180645/500x800) no-repeat center center / cover"></section>
     <section class="details">
-        <form method="POST" action="/financeiros?_method=PUT">
+        <form method="POST" action="/financeiros/{{token}}?_method=PUT">
                 <h3>Editar Financeiro</h3>
 
                 {% include 'financeiros/fields.njk' %}
@@ -14,7 +14,7 @@
         
         </form>
 
-        <form id="form-delete" action="/financeiros?_method=DELETE" method='POST'>
+        <form id="form-delete" action="/financeiros/{{token}}?_method=DELETE" method='POST'>
             <input type="hidden" name="id" value={{financeiro.id}}>
             <button type='submit'>Deletar</button>
 

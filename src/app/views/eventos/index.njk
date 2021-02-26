@@ -2,24 +2,27 @@
 
 {% block content %}
 <div class="card table-container">
-
+   
     <div class="header">
-        <a class="button" href="/eventos/create">Novo</a>
-        <form action="/eventos" method="GET">
+        
+        <a class="button" href="/eventos/create/{{token}}">Novo</a>
+        
+        <form action="/eventos/{{token}}" method="GET">
             <input
                 type="text"
                 name="filter"
                 placeholder="Descrição"
                 value={{filter}}
             >
+            
             <button type="submit">Filtrar</button>
+            
         </form>
     </div>
 
     <table width="100%">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Descrição</th>
                 <th>Valor</th>
                 <th></th>
@@ -29,18 +32,15 @@
             
             {% for evento in eventos %}
             <tr>
-                <td>
-                    {{evento.id}}
-                </td>
                 <td>{{evento.descricao}}</td>
                 <td>{{evento.valor}}</td>
-                <td><a href="/eventos/{{evento.id}}">Ver</a></td>
+                <td><a href="/eventos/{{evento.id}}/{{token}}">Ver</a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <div class="turn-back">
-        <a class="button back" href="/general/panelDirector">Voltar</a>
+        <a class="button back" href="/general/panelDirector/{{token}}">Voltar</a>
     </div>
 </div>
 {% endblock content %}

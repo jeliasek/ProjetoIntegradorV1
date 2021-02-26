@@ -3,9 +3,12 @@
 {% block content %}
 
 <div class="card table-container">
+<div class="sair"> 
+    <a href="/general/login"><span class="material-icons">logout</span></a>
+</div>
 <div id="wrapper">
             
-            <a href="/membros/{{membro.id}}">
+            <a href="/privates/membros/{{membro.id}}/{{token}}">
                 <img src="{{membro.foto}}" alt="Joao">
             </a>
     </div>
@@ -14,27 +17,34 @@
     </div>
     <input type="hidden" name="token" value="{{token}}" />
    <div class="buttonsHome">
-
-       <div class="buttonHome">
-           <a href="/privates/eventos/{{token}}">EVENTOS</a>
+       
+       <div class="buttonHome" onclick="window.location='/privates/eventos/{{token}}'">
+            <span class="material-icons">today</span>
+            <a href="/privates/eventos/{{token}}">EVENTOS</a>
        </div>
 
-       <div class="buttonHome">
-           <a href="/privates/encontros/{{token}}">ENCONTROS</a>
+       <div class="buttonHome" onclick="window.location='/privates/encontros/{{token}}'">
+            <span class="material-icons">groups</span>
+            <a href="/privates/encontros/{{token}}">ENCONTROS</a>
        </div>
 
-       <div class="buttonHome">
-           <a href="/privates/financeiros/{{token}}">FINANCEIRO</a>
+       <div class="buttonHome" onclick="window.location='/privates/financeiros/{{token}}'">
+            <span class="material-icons">paid</span>
+            <a href="/privates/financeiros/{{token}}">FINANCEIRO</a>
        </div>
 
-       <div class="buttonHome">
-           <a href="">MIDIAS</a>
+       <div class="buttonHome" onclick="window.location=''">
+            <span class="material-icons">mms</span>
+            <a href="">MIDIAS</a>
        </div>
-
-       <div class="buttonHome">
-           <a href="/general/panelDirector">PAINEL DIRETOR</a>
+    
+    {% if membro.isdiretor == true%}
+       <div class="buttonHome" onclick="window.location='/general/panelDirector/{{token}}'">
+            <span class="material-icons">admin_panel_settings</span>
+            <a href="/general/panelDirector/{{token}}">PAINEL DIRETOR</a>
        </div>
-
+    {%endif%}
+    
    </div>
 </div>
 <script>

@@ -7,6 +7,7 @@
         style="background: url(https://source.unsplash.com/collection/1180645/500x500) no-repeat center center / cover"></section>
 
     <section class="details">
+        
         <h3>Detalhes Encontro</h3>
 
         <div class="item">
@@ -19,8 +20,8 @@
             <div>{{encontro.data}}</div>
         </div>
 
-        <a href="/encontros/{{ encontro.id }}/edit" class="button">Editar</a>
-        <a href="/encontros" class="button">Voltar</a>
+        <a href="/encontros/{{ encontro.id }}/edit/{{token}}" class="button">Editar</a>
+        <a href="/encontros/{{token}}" class="button">Voltar</a>
 
     </section>
 </div>

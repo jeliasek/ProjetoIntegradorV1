@@ -2,10 +2,12 @@
 
 {% block content %}
 <div class="card table-container">
-
+    <div class="sair"> 
+        <a href="/general/login">Sair</a>
+    </div>
     <div class="header">
-        <a class="button" href="/financeiros/create">Novo</a>
-        <form action="/financeiros" method="GET">
+        <a class="button" href="/financeiros/create/{{token}}">Novo</a>
+        <form action="/financeiros/{{token}}" method="GET">
             <input
                 type="text"
                 name="filter"
@@ -19,7 +21,6 @@
     <table width="100%">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Descrição</th>
                 <th>Valor</th>
                 <th>Pago</th>
@@ -31,20 +32,17 @@
             
             {% for financeiro in financeiros %}
             <tr>
-                <td>
-                    {{financeiro.id}}
-                </td>
                 <td>{{financeiro.descricao}}</td>
                 <td>{{financeiro.valor}}</td>
                 <td>{{ "Sim" if financeiro.ispago else "Não"}}</td>
                 <td>{{ "Entrada" if financeiro.tipo == "E" else "Saída"}}</td>
-                <td><a href="/financeiros/{{financeiro.id}}">Ver</a></td>
+                <td><a href="/financeiros/{{financeiro.id}}/{{token}}">Ver</a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <div class="turn-back">
-        <a class="button back" href="/general/panelDirector">Voltar</a>
+        <a class="button back" href="/general/panelDirector/{{token}}">Voltar</a>
     </div>
 </div>
 {% endblock content %}
