@@ -3,47 +3,47 @@ const { age, date } = require('../../lib/utils')
 
 
 module.exports = {
-    async all(callback){
+    async all(callback) {
 
-        db.query(`SELECT * FROM eventos ORDER BY datainicio`, function(err,results){
-            if(err) throw `Database Error! ${err}`
-            
+        db.query(`SELECT * FROM eventos ORDER BY datainicio`, function (err, results) {
+            if (err) throw `Database Error! ${err}`
+
             callback(results.rows)
         })
     },
-    allOfMember(idMembro, callback){
-        db.query(`SELECT e.id AS id, e.descricao AS descricao, e.valor AS valor, me.idmembro AS participa FROM eventos e LEFT JOIN membrosevento me on me.idevento = e.id AND me.idmembro = ${idMembro}
-                  WHERE idmembro isNull OR idmembro = ${idMembro}`, function(err,results){
-            if(err) throw `Database Error! ${err}`
-            
+    allOfMember(idMembro, callback) {
+        db.query(`SELECT e.id AS id, e.descricao AS descricao, e.valor AS valor, me.idmembro AS participa, e.datafim as datafim FROM eventos e LEFT JOIN membrosevento me on me.idevento = e.id AND me.idmembro = ${idMembro}
+                  WHERE idmembro isNull OR idmembro = ${idMembro}`, function (err, results) {
+            if (err) throw `Database Error! ${err}`
+
             callback(results.rows)
         })
     },
-    findByOfMember(idMembro, filter, callback){
-        
-        db.query(`SELECT e.id AS id, e.descricao AS descricao, e.valor AS valor, me.idmembro AS participa 
+    findByOfMember(idMembro, filter, callback) {
+
+        db.query(`SELECT e.id AS id, e.descricao AS descricao, e.valor AS valor, me.idmembro AS participa, e.datafim as datafim 
                   FROM eventos e LEFT JOIN membrosevento me on me.idevento = e.id AND me.idmembro = ${idMembro}
                   WHERE e.descricao ILIKE '%${filter}%'
                   AND (me.idmembro isNull OR me.idmembro = ${idMembro})
-                  ORDER BY e.datainicio asc`, function(err,results){
-            if(err) throw `Database Error! ${err}`
-            
+                  ORDER BY e.datainicio asc`, function (err, results) {
+            if (err) throw `Database Error! ${err}`
+
             callback(results.rows)
         })
     },
-    findBy(filter, callback){
-        
+    findBy(filter, callback) {
+
         db.query(`SELECT eventos.*
                   FROM eventos
                   WHERE eventos.descricao ILIKE '%${filter}%'
-                  ORDER BY eventos.datainicio asc`, function(err,results){
-            if(err) throw `Database Error! ${err}`
-            
+                  ORDER BY eventos.datainicio asc`, function (err, results) {
+            if (err) throw `Database Error! ${err}`
+
             callback(results.rows)
         })
     },
-    create(data, callback){
-        
+    create(data, callback) {
+
         const query = `
             INSERT INTO eventos(
                 descricao,
@@ -61,24 +61,24 @@ module.exports = {
             data.valor
         ]
 
-        db.query(query, values, function(err, results){
-            if(err) throw `Database Error!  --- ${err}`
+        db.query(query, values, function (err, results) {
+            if (err) throw `Database Error!  --- ${err}`
 
             callback(results.rows[0])
         })
 
     },
-    find(id, callback){
-       db.query(`SELECT *
+    find(id, callback) {
+        db.query(`SELECT *
                  FROM eventos
-                 WHERE eventos.id = $1`, [id], function(err, results){
-            if(err) throw `Database Error! ${err}`
+                 WHERE eventos.id = $1`, [id], function (err, results) {
+            if (err) throw `Database Error! ${err}`
 
             callback(results.rows[0])
         })
-        
+
     },
-    update(data, callback){
+    update(data, callback) {
         const query = `
         UPDATE eventos SET
             descricao=($1),
@@ -96,24 +96,24 @@ module.exports = {
         ]
 
 
-        db.query(query, values, function(err, results){
-            if(err) throw `Database Error! ${err}`
+        db.query(query, values, function (err, results) {
+            if (err) throw `Database Error! ${err}`
 
             callback()
         })
     },
-    delete(id, callback){
-        db.query(`DELETE FROM eventos WHERE id = $1`, [id], function(err, results){
-            if(err) throw `Database Error! ${err} `
+    delete(id, callback) {
+        db.query(`DELETE FROM eventos WHERE id = $1`, [id], function (err, results) {
+            if (err) throw `Database Error! ${err} `
 
             return callback()
         })
     }
     //instructorSelectOptions(callback){
-        //db.query(`SELECT name, id FROM instructors`, function(err, results){
-       //     if(err) throw `Database Error! ${err}`
-//
-      //      callback(results.rows)
-      //  })
+    //db.query(`SELECT name, id FROM instructors`, function(err, results){
+    //     if(err) throw `Database Error! ${err}`
+    //
+    //      callback(results.rows)
+    //  })
     //}
 }

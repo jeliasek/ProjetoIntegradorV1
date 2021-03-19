@@ -18,6 +18,7 @@
     <table width="100%">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Descrição do Encontro</th>
                 <th>Data</th>
                 <th></th>
@@ -28,16 +29,20 @@
             
             {% for encontro in encontros %}
             <tr>
+                <td>{{encontro.id}}</td>
                 <td>{{encontro.descricao}}</td>
                 <td>{{encontro.data}}</td>
                 <td><a href="/privates/encontros/{{encontro.id}}/{{token}}">Ver</a></td>
-               
-                {% if encontro.participa < 1 %}
-                    <td><a href="/privates/encontros/participar/{{encontro.id}}/{{token}}">Participar</a></td>
-                {%endif%}
+                {% if not encontro.isPassou %}
+                    {% if encontro.participa < 1%}
+                        <td><a href="/privates/encontros/participar/{{encontro.id}}/{{token}}">Participar</a></td>
+                    {%endif%}
 
-                {% if encontro.participa > 0 %}
-                    <td><a href="/privates/encontros/retirar/{{encontro.id}}/{{token}}">Retirar-se</a></td>
+                    {% if encontro.participa > 0%}
+                        <td><a href="/privates/encontros/retirar/{{encontro.id}}/{{token}}">Retirar-se</a></td>
+                    {%endif%}
+                {% else %}
+                    <td></td>
                 {%endif%}
             </tr>
             {% endfor %}

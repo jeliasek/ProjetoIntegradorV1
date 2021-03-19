@@ -23,6 +23,7 @@
     <table width="100%">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Descrição</th>
                 <th>Valor</th>
                 <th></th>
@@ -32,6 +33,7 @@
             
             {% for evento in eventos %}
             <tr>
+                <td>{{evento.id}}</td>
                 <td>{{evento.descricao}}</td>
                 <td>{{evento.valor}}</td>
                 <td><a href="/eventos/{{evento.id}}/{{token}}">Ver</a></td>

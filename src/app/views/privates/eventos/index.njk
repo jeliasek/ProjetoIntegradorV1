@@ -18,25 +18,34 @@
     <table width="100%">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Descrição do Evento</th>
                 <th>Valor</th>
                 <th></th>
                 <th></th>
+                
             </tr>
         </thead>
         <tbody>
             
             {% for evento in eventos %}
             <tr>
+                <td>{{evento.id}}</td>
                 <td>{{evento.descricao}}</td>
                 <td>{{evento.valor}}</td>
-                <td><a href="/privates/eventos/{{evento.id}}/{{token}}">Ver</a></td>
-                {%if evento.participa < 1 %}
-                    <td><a href="/privates/eventos/participar/{{evento.id}}/{{token}}">Participar</a></td>
-                {%endif%}
                 
-                {%if evento.participa > 0%}
-                    <td><a href="/privates/eventos/retirar/{{evento.id}}/{{token}}">Retirar-se</a></td>
+                <td><a href="/privates/eventos/{{evento.id}}/{{token}}">Ver</a></td>
+                {% if not evento.isPassou %}
+                    {%if evento.participa < 1 %}
+                        <td><a href="/privates/eventos/participar/{{evento.id}}/{{token}}">Participar</a></td>
+                    {%endif%}
+                    
+                    {%if evento.participa > 0%}
+                        <td><a href="/privates/eventos/retirar/{{evento.id}}/{{token}}">Retirar-se</a></td>
+                    {%endif%}
+                {% else %}
+                    
+                    <td></td>
                 {%endif%}
             </tr>
             {% endfor %}
