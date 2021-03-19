@@ -40,6 +40,20 @@
             {% endfor %}
         </tbody>
     </table>
+    <div class="totalizador">
+        <div class="total-entradas">
+            <a>TOTAL ENTRADAS</a>
+            <a>{{totalEntradas}}</a>
+        </div>
+        <div class="total-saidas">
+            <a>TOTAL SAÍDAS</a>
+            <a>{{totalSaidas}}</a>
+        </div>
+        <div class="total-geral">
+            <a>SALDO</a>
+            <a>{{saldo}}</a>
+        </div>
+    </div>
     <div class="turn-back">
         <a class="button back" href="/general/panelDirector/{{token}}">Voltar</a>
     </div>

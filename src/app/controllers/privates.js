@@ -146,11 +146,40 @@ module.exports = {
             const { filter } = req.query
             if (filter) {
                 Financeiro.findByOfMember(filter, idMembro, function (financeiros) {
-                    return res.render(`privates/financeiros/index`, { financeiros, filter, token })
+                    let totalGeral = 0;
+                    let totalEntrada = 0;
+                    let totalSaida = 0;
+                    for (let financeiro in financeiros) {
+                        totalGeral += Number(financeiros[financeiro].valor)
+                        if (financeiros[financeiro].tipo === 'E') {
+                            totalEntrada += Number(financeiros[financeiro].valor)
+                        } else {
+                            totalSaida += Number(financeiros[financeiro].valor)
+                        }
+                    }
+                    const total = new Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(totalGeral)
+                    const totalEntradas = new Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(totalEntrada)
+                    const totalSaidas = new Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(totalSaida)
+                    return res.render(`privates/financeiros/index`, { financeiros, filter, token, total, totalEntradas, totalSaidas })
                 })
             } else {
                 Financeiro.allOfMember(idMembro, function (financeiros) {
-                    return res.render(`privates/financeiros/index`, { financeiros, token })
+                    let totalGeral = 0;
+                    let totalEntrada = 0;
+                    let totalSaida = 0;
+                    for (let financeiro in financeiros) {
+
+                        if (financeiros[financeiro].tipo === 'E') {
+                            totalEntrada += Number(financeiros[financeiro].valor)
+                        } else {
+                            totalSaida += Number(financeiros[financeiro].valor)
+                        }
+                    }
+                    totalGeral = totalEntrada - totalSaida
+                    const saldo = new Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(totalGeral)
+                    const totalEntradas = new Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(totalEntrada)
+                    const totalSaidas = new Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(totalSaida)
+                    return res.render(`privates/financeiros/index`, { financeiros, token, saldo, totalSaidas, totalEntradas })
                 })
             }
         }

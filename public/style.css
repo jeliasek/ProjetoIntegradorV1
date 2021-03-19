@@ -413,3 +413,49 @@ td:last-child{
 .material-icons{
     width: -webkit-fill-available;
 }
+
+.totalizador {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+
+    text-align: center;
+    justify-items: center;
+
+    margin: 20px auto;
+
+    font-weight: bold;
+}
+
+.total-entradas {
+    background-color: #52a330;
+    width: 200px;
+    padding: 5%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    border-radius: 6px;
+}
+
+
+.total-saidas {
+    background-color: #dd5454;
+    padding: 5%;
+    width: 200px;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    border-radius: 6px;
+    
+}
+
+.total-geral {
+    background-color: #495dc0;
+    width: 200px;
+    padding: 5%;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-items: center;
+    border-radius: 6px;
+}
