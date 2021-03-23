@@ -203,6 +203,23 @@ module.exports = {
         }
     },
 
+    showMedia(req, res) {
+        const token = req.params.token
+        var idMembro = 0
+        idMembro = tokenId(token)
+        if (idMembro == 0) {
+            res.redirect("/general/error")
+        } else {
+            Media.find(req.params.id, function (media) {
+                if (!media) return res.send('Media not found')
+
+                // encontro.datainicio = date(encontro.datainicio).format
+                //encontro.datafim = date(encontro.datafim).format
+                return res.render('privates/medias/show', { media, token })
+            })
+        }
+    },
+
     showMembro(req, res) {
         const token = req.params.token
         var idMembro = 0

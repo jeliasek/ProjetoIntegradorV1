@@ -81,6 +81,7 @@ routes.get('/privates/financeiros/:token', privates.indexFinanceiro)
 routes.get('/privates/financeiros/:id/:token', privates.showFinanceiro)
 
 routes.get('/privates/medias/:token', privates.indexMedia)
+routes.get('/privates/medias/:id/:token', privates.showMedia)
 
 routes.get('/privates/membros/:id/:token', privates.showMembro)
 routes.get('/privates/membros/:id/edit/:token', privates.editMembro)

@@ -21,7 +21,7 @@
             <tr>
                 <th>ID</th>
                 <th>Descrição</th>
-                <th>Link</th>
+                <th></th>
                 <th></th>
             </tr>
         </thead>
@@ -33,14 +33,25 @@
                     {{media.id}}
                 </td>
                 <td>{{media.descricao}}</td>
-                <td>{{media.link}}</td>
                 <td><a href="/medias/{{media.id}}/{{token}}">Ver</a></td>
+                <td><a class="visualizarMidia" id={{media.link}}>Reproduzir</a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <div class="turn-back">
         <a class="button back" href="/general/panelDirector/{{token}}">Voltar</a>
+    </div>
+</div>
+<div class="modal-overlay">
+    <div class="modal">
+        <a class="close-modal">
+            <i class="material-icons">close</i>
+        </a>
+
+        <div class="modal-content">
+            <iframe src="" frameborder="0"></iframe>
+        </div>
     </div>
 </div>
 {% endblock content %}
