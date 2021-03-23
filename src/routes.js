@@ -7,7 +7,7 @@ const eventos = require('./app/controllers/eventos')
 const encontros = require('./app/controllers/encontros')
 const financeiros = require("./app/controllers/financeiros")
 const privates = require("./app/controllers/privates")
-
+const medias = require("./app/controllers/medias")
 
 
 routes.get('/general/login', general.login)
@@ -17,7 +17,7 @@ routes.get('/general', general.login)
 routes.get("/general/panelDirector/:token", general.panelDirector)
 //routes.use(authMiddleware)
 
-routes.get('/', function(req, res){
+routes.get('/', function (req, res) {
     return res.redirect("/general/login")
     //res.send({ ok: true })
 })
@@ -57,6 +57,14 @@ routes.get('/financeiros/:id/edit/:token', financeiros.edit)
 routes.put("/financeiros/:token", financeiros.put)
 routes.delete("/financeiros/:token", financeiros.delete)
 
+routes.get('/medias/:token', medias.index)
+routes.get('/medias/create/:token', medias.create)
+routes.post("/medias/:token", medias.post)
+routes.get('/medias/:id/:token', medias.show)
+routes.get('/medias/:id/edit/:token', medias.edit)
+routes.put("/medias/:token", medias.put)
+routes.delete("/medias/:token", medias.delete)
+
 routes.get('/privates/eventos/:token', privates.indexEvento)
 routes.get('/privates/eventos/:id/:token', privates.showEvento)
 routes.get('/privates/eventos/participar/:id/:token', privates.participarEvento)
@@ -71,6 +79,8 @@ routes.get('/privates/encontros/retirar/:id/:token', privates.retirarEncontro)
 
 routes.get('/privates/financeiros/:token', privates.indexFinanceiro)
 routes.get('/privates/financeiros/:id/:token', privates.showFinanceiro)
+
+routes.get('/privates/medias/:token', privates.indexMedia)
 
 routes.get('/privates/membros/:id/:token', privates.showMembro)
 routes.get('/privates/membros/:id/edit/:token', privates.editMembro)

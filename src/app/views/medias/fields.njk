@@ -1,0 +1,23 @@
+ <div class="item">
+            <div>Descrição</div>
+            <div>
+                <input 
+                    type="text"
+                    name="descricao"
+                    value="{{ media.descricao }}"
+                >
+            </div>
+        </div>
+
+        <div class="item">
+            <div>Link</div>
+            <div>
+                <input 
+                    type="text"
+                    name="link"
+                    value="{{ media.link }}"
+                >
+            </div>
+        </div>       
+        <button type="submit">Salvar</button>
+        <a href="/medias/{{token}}" class="button">Voltar</a>

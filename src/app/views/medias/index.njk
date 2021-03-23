@@ -1,0 +1,46 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+<div class="card table-container">
+    
+    <div class="header">
+        <a class="button" href="/medias/create/{{token}}">Novo</a>
+        <form action="/medias/{{token}}" method="GET">
+            <input
+                type="text"
+                name="filter"
+                placeholder="Descrição"
+                value={{filter}}
+            >
+            <button type="submit">Filtrar</button>
+        </form>
+    </div>
+
+    <table width="100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descrição</th>
+                <th>Link</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for media in medias %}
+            <tr>
+                <td>
+                    {{media.id}}
+                </td>
+                <td>{{media.descricao}}</td>
+                <td>{{media.link}}</td>
+                <td><a href="/medias/{{media.id}}/{{token}}">Ver</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="turn-back">
+        <a class="button back" href="/general/panelDirector/{{token}}">Voltar</a>
+    </div>
+</div>
+{% endblock content %}

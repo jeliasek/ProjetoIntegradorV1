@@ -5,6 +5,7 @@ const Encontro = require('../models/encontro')
 const Financeiro = require('../models/financeiro')
 const Membro = require('../models/membro')
 const Private = require('../models/private')
+const Media = require('../models/media')
 const { age, date, tokenId } = require('../../lib/utils')
 const e = require('express')
 var CryptoJS = require("crypto-js")
@@ -379,6 +380,25 @@ module.exports = {
                 return res.redirect(`/privates/encontros/${token}`)
             })
         }
-    }
+    },
+    indexMedia(req, res) {
+        const token = req.params.token
+        const { filter } = req.query
+        var idMembro = 0
+        idMembro = tokenId(token)
+        if (idMembro == 0) {
+            res.redirect("/general/error")
+        } else {
+            if (filter) {
+                Media.findBy(filter, function (medias) {
+                    return res.render(`privates/medias/index`, { medias, filter, token })
+                })
+            } else {
+                Media.all(function (medias) {
+                    return res.render(`privates/medias/index`, { medias, token })
+                })
+            }
+        }
+    },
 
 }
