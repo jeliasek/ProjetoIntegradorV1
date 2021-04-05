@@ -267,6 +267,11 @@ module.exports = {
             const keys = Object.keys(req.body)
             var error = ""
             for (key of keys) {
+                if (key == "senha") {
+                    if (req.body[key].length < 6) {
+                        error = "A senha deve ter no mínimo 6 caracteres"
+                    }
+                }
                 if (req.body[key] == "") {
                     error = "Todos os campos devem ser preenchidos!"
                 }
@@ -286,7 +291,7 @@ module.exports = {
                     }
                     var bytes = CryptoJS.AES.decrypt(membro.senha, 'secret key 123');
                     membro.senha = bytes.toString(CryptoJS.enc.Utf8)
-                    //membro.birth = date(membro.datanasc).iso
+                    membro.birth = date(membro.datanasc).iso
                     return res.render("privates/membros/edit", { membro, error, token })
                 })
 

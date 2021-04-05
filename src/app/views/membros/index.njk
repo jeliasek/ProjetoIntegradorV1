@@ -21,7 +21,6 @@
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>ID</th>
                 <th>E-Mail</th>
                 <th>Situação</th>
                 <th></th>
@@ -35,7 +34,6 @@
                     <span style="background-image: url({{membro.foto}})"></span>
                     {{membro.nome}}
                 </td>
-                <td>{{membro.id}}</td>
                 
                 <td>{{membro.email}}</td>
                 <td>{{ "Ativo" if membro.situacao == "A" else "Inativo"}}</td>
